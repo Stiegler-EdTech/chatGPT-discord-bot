@@ -1,5 +1,4 @@
 import os
-import json
 import psycopg2
 from discord import Message
 
@@ -21,14 +20,14 @@ def upload_message_to_db(message: Message, user_message: str, response: str):
 
     # Convert the message to a dictionary
     message_dict = {
-        "message_id": message.id,
-        "channel_id": message.channel.id,
-        "guild_id": message.guild.id,
-        "user_id": message.user.id,
+        "message_id": str(message.id),
+        "channel_id": str(message.channel.id),
+        "guild_id": str(message.guild.id),
+        "user_id": str(message.user.id),
         "user_name": str(message.user),
         "user_message": user_message,
         "bot_response": response,
-        "timestamp": message.created_at
+        "timestamp": message.created_at.isoformat(),
     }
 
     try:
@@ -56,9 +55,3 @@ def upload_message_to_db(message: Message, user_message: str, response: str):
         print("Message stored in the database successfully")
     except Exception as e:
         print(f"An error occurred while inserting into the database: {e}")
-
-# Example usage
-# message = ...  # Assume you have a Discord Message object
-# user_message = "Example user message"
-# response = "Example bot response"
-# upload_message_to_db(message, user_message, response)

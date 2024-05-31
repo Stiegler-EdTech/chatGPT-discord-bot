@@ -2,7 +2,8 @@ import os
 import discord
 import asyncio
 
-from src import personas, saveToDb
+from src import personas
+from src.saveToDb import upload_message_to_db
 from src.log import logger
 from utils.message_utils import send_split_message
 
@@ -75,7 +76,7 @@ class discordClient(discord.Client):
         try:
             response = await self.handle_response(user_message)
             response_content = f'> **{user_message}** - <@{str(author)}> \n\n{response}'
-            # saveToDb.upload_message_to_spaces(message, user_message, response)
+            upload_message_to_db(message, user_message, response)
             await send_split_message(self, response_content, message)
         except Exception as e:
             logger.exception(f"Error while sending : {e}")
