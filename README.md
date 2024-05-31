@@ -162,3 +162,10 @@
    > **Warning**
    > The bot will easily be triggered in `replyall` mode, which could cause program failures
  ---
+
+
+----
+
+## Stiegler Additions
+
+Join URL: https://discordapp.com/oauth2/authorize?&client_id=1088418290575093831&scope=bot&permissions=34359994368
